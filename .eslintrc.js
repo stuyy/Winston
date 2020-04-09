@@ -30,6 +30,7 @@ module.exports = {
         "linebreak-style": "off",
         "class-methods-use-this": "off",
         "no-plusplus": "off",
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "no-console": ["error"]
     }
 };

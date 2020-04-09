@@ -1,2 +1,11 @@
 node_modules
 .env
+.map
+.js.map
+/.js.map
+**/.js.map
+./lib/*.js.map
+lib/*.js.map
+lib/**/*.js.map
+run.sh
+.vscode

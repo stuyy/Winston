@@ -1,17 +1,21 @@
 import { config } from 'dotenv';
 import Bot from './bot/Bot';
-import ClientRegister from './utils/CommandRegister';
+import Register from './utils/Register';
 import BaseCommand from './structures/BaseCommand';
-import CommandHandler from './structures/CommandHandler';
+import BaseEvent from './structures/BaseEvent';
 
-const register = new ClientRegister();
+const register = new Register();
 
 async function init() {
   const bot = new Bot({});
   await register.registerCommands('../commands');
-  await bot.login(process.env.BOT_TOKEN);
+  await register.registerEvents('../events');
+  bot.login(process.env.BOT_TOKEN);
   register.on('commandRegistered', (command: BaseCommand) => {
     bot.addCommand(command);
+  });
+  register.on('eventRegistered', (event: BaseEvent) => {
+    bot.addEvent(event);
   });
 }
 
