@@ -7,6 +7,7 @@ export default class MessageEvent extends BaseEvent {
   }
 
   public exec(message: Message): void {
-
+    if (message.author.bot || message.channel.type === 'dm') return;
+    message.channel.send('Hello World');
   }
 }

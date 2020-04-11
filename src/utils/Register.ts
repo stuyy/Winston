@@ -13,7 +13,7 @@ export default class Register extends EventEmitter {
     await asyncForEach(files, async (file: string) => {
       const isDir: boolean = await this.isDir(path.join(filePath, file));
       if (isDir) await this.registerCommands(path.join(dir, file));
-      else if (file.endsWith('.ts') || file.endsWith('.js')) {
+      if (file.endsWith('.ts') || file.endsWith('.js')) {
         const { default: BaseCommandClass } = await import(path.join(dir, file));
         const command = new BaseCommandClass();
         if (command instanceof BaseCommand) {
@@ -42,7 +42,7 @@ export default class Register extends EventEmitter {
     return true;
   }
 
-  private async getFiles(filePath: string) {
+  public async getFiles(filePath: string) {
     return fs.readdir(filePath);
   }
 

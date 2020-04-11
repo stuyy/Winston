@@ -4,15 +4,16 @@
   "description": "Winston Discord Bot",
   "main": "index.js",
   "scripts": {
-    "all": "npm run lint:fix && npm run build",
+    "all": "npm run lint && npm run test && npm run build",
     "build": "tsc --build",
     "dev": "nodemon --exec ts-node src/index.ts",
     "docs": "npx typedoc --out docs src",
+    "jest:clear": "jest --clearCache",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint --fix . --ext .ts",
     "start": "node ./lib/index",
-    "test": "jest --coverage && rm -r coverage",
-    "test:watch": "jest --watch"
+    "test": "jest --coverage --no-cache",
+    "test:watch": "jest --watch --coverage --no-cache"
   },
   "repository": {
     "type": "git",

@@ -6,7 +6,6 @@ import BaseEvent from '../structures/BaseEvent';
 import EventHandler from '../structures/EventHandler';
 
 export default class Bot extends Client {
-
   private register: ClientRegister;
 
   private commands: CommandHandler;
@@ -22,7 +21,7 @@ export default class Bot extends Client {
 
   /**
    * Gets register
-   * @returns register 
+   * @returns register
    */
   public getRegister(): ClientRegister {
     return this.register;

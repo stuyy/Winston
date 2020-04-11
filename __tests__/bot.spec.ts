@@ -5,7 +5,6 @@ import MockCommand from '../__mocks__/commands/help.mock';
 import CommandHandler from '../src/structures/CommandHandler';
 
 describe('spying on Bot methods', () => {
-
   const bot: Bot = new Bot({});
   const cmd: BaseCommand = new MockCommand('mock', 'mock', [], []);
   jest.spyOn(bot, 'addCommand');
@@ -48,7 +47,6 @@ describe('spying on Bot methods', () => {
 });
 
 describe('adds three commands', () => {
-
   const bot: Bot = new Bot({});
 
   jest.spyOn(bot, 'addCommand');

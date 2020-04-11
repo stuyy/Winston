@@ -11,3 +11,4 @@ run.sh
 .vscode
 docs
 lib
+coverage

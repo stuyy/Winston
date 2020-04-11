@@ -8,12 +8,16 @@ const register = new Register();
 
 async function init() {
   const bot = new Bot({});
-  await register.registerCommands('../commands');
-  await register.registerEvents('../events');
-  bot.login(process.env.BOT_TOKEN);
+  register.registerCommands('../commands')
+    .then(() => register.registerEvents('../events'))
+    .then(() => bot.login(process.env.BOT_TOKEN))
+    // eslint-disable-next-line no-console
+    .catch((err) => console.log(err));
+
   register.on('commandRegistered', (command: BaseCommand) => {
     bot.addCommand(command);
   });
+
   register.on('eventRegistered', (event: BaseEvent) => {
     bot.addEvent(event);
   });
