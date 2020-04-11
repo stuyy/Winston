@@ -9,3 +9,5 @@ lib/*.js.map
 lib/**/*.js.map
 run.sh
 .vscode
+docs
+lib
