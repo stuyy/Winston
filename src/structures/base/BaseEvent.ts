@@ -1,4 +1,4 @@
-import Bot from '../bot/Bot';
+import Bot from '../../bot/Bot';
 
 export default abstract class BaseEvent {
   [x: string]: any;
@@ -11,5 +11,5 @@ export default abstract class BaseEvent {
 
   public getName(): any { return this.name; }
 
-  public abstract exec(args: any): void;
+  public abstract exec(bot: Bot, args: any): void;
 }

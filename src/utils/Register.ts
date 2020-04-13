@@ -1,9 +1,9 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { EventEmitter } from 'events';
-import BaseCommand from '../structures/BaseCommand';
+import BaseCommand from '../structures/base/BaseCommand';
 import { asyncForEach } from './asyncUtils';
-import BaseEvent from '../structures/BaseEvent';
+import BaseEvent from '../structures/base/BaseEvent';
 
 export default class Register extends EventEmitter {
   public async registerCommands(dir: string) {
@@ -31,7 +31,7 @@ export default class Register extends EventEmitter {
     await asyncForEach(files, async (file: string) => {
       const isDir: boolean = await this.isDir(path.join(filePath, file));
       if (isDir) await this.registerEvents(path.join(dir, file));
-      else if (file.endsWith('.ts')) {
+      else if (file.endsWith('.ts') || file.endsWith('.js')) {
         const { default: BaseEventClass } = await import(path.join(dir, file));
         const event = new BaseEventClass();
         if (event instanceof BaseEvent) {

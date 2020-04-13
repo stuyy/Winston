@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import Bot from '../src/bot/Bot';
-import BaseCommand from '../src/structures/BaseCommand';
+import BaseCommand from '../src/structures/base/BaseCommand';
 import MockCommand from '../__mocks__/commands/help.mock';
 import CommandHandler from '../src/structures/CommandHandler';
 
