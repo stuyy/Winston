@@ -18,13 +18,11 @@ export default class MessageEvent extends BaseEvent {
     const prefix = bot.getBotConfig().getPrefix();
     const { content } = message;
     if (content.startsWith(prefix)) {
-      // Get the command name
-      const cmdName = getCommandName(prefix, message.content);
-      // Check if command name is in the command registry
-      if (bot.getCommands().has(cmdName)) {
+      const cmdName = getCommandName(prefix, message.content); // Get the command name
+      if (bot.getCommands().has(cmdName)) { // Check if command name is in the command registry
+        // Check permissions
         const command: BaseCommand = bot.getCommands().get(cmdName);
         if (command.getCommandConfigurable().argsRequired()) {
-          // Parse arguments with command.
           const delimiter = command.getCommandConfigurable().getDelimiter();
           const args = getCommandArgumentsWithDelimiter(prefix, cmdName, content, delimiter);
           command.exec(bot, message, args);
@@ -32,8 +30,6 @@ export default class MessageEvent extends BaseEvent {
           command.exec(bot, message, null);
         }
       }
-    } else {
-      // do something
     }
   }
 }

@@ -4,7 +4,7 @@ import CommandHandler from '../structures/CommandHandler';
 import BaseCommand from '../structures/base/BaseCommand';
 import BaseEvent from '../structures/base/BaseEvent';
 import EventHandler from '../structures/EventHandler';
-import BotConfigurable from '../structures/configs/BotConfigurable';
+import BotConfigurable from '../structures/configs/configurable/bot/BotConfigurable';
 
 export default class Bot extends Client {
   private register: ClientRegister;
