@@ -2,7 +2,7 @@
 
 import Bot from '../src/bot/Bot';
 import MockCommand from '../__mocks__/commands/help.mock';
-import BaseCommand from '../src/structures/BaseCommand';
+import BaseCommand from '../src/structures/base/BaseCommand';
 import CommandHandler from '../src/structures/CommandHandler';
 
 jest.mock('../src/bot/Bot', () => jest.fn().mockImplementation(() => ({

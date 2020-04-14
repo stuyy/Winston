@@ -12,8 +12,9 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint --fix . --ext .ts",
     "start": "node ./lib/index",
-    "test": "jest --coverage --no-cache",
-    "test:watch": "jest --watch --coverage --no-cache"
+    "test": "jest --no-cache --detectOpenHandles --forceExit",
+    "test:coverage": "jest --coverage --no-cache --forceExit",
+    "test:watch": "jest --watch --no-cache"
   },
   "repository": {
     "type": "git",

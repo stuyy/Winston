@@ -1,8 +1,8 @@
 import { config } from 'dotenv';
 import Bot from './bot/Bot';
 import Register from './utils/Register';
-import BaseCommand from './structures/BaseCommand';
-import BaseEvent from './structures/BaseEvent';
+import BaseCommand from './structures/base/BaseCommand';
+import BaseEvent from './structures/base/BaseEvent';
 
 const register = new Register();
 
@@ -10,6 +10,7 @@ async function init() {
   const bot = new Bot({});
   register.registerCommands('../commands')
     .then(() => register.registerEvents('../events'))
+    .then(() => bot.getBotConfig().setPrefix(process.env.BOT_PREFIX))
     .then(() => bot.login(process.env.BOT_TOKEN))
     // eslint-disable-next-line no-console
     .catch((err) => console.log(err));

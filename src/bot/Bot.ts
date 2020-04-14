@@ -1,9 +1,10 @@
 import { Client, ClientOptions } from 'discord.js';
 import ClientRegister from '../utils/Register';
 import CommandHandler from '../structures/CommandHandler';
-import BaseCommand from '../structures/BaseCommand';
-import BaseEvent from '../structures/BaseEvent';
+import BaseCommand from '../structures/base/BaseCommand';
+import BaseEvent from '../structures/base/BaseEvent';
 import EventHandler from '../structures/EventHandler';
+import BotConfigurable from '../structures/configs/BotConfigurable';
 
 export default class Bot extends Client {
   private register: ClientRegister;
@@ -12,11 +13,14 @@ export default class Bot extends Client {
 
   private events: EventHandler;
 
+  private config: BotConfigurable;
+
   constructor(private o: ClientOptions) {
     super(o);
     this.register = new ClientRegister();
     this.commands = new CommandHandler();
     this.events = new EventHandler();
+    this.config = new BotConfigurable();
   }
 
   /**
@@ -69,9 +73,21 @@ export default class Bot extends Client {
     return this.commands.get(command) ? this.commands.get(command) : null;
   }
 
+  /**
+   * Adds an event instance to the bot to listen to.
+   * @param event - the event to add to the handler
+   */
   public addEvent(event: BaseEvent): void {
     this.events.set(event.getName(), event);
     const name = event.getName();
-    this.on(name, event.exec.bind(this));
+    this.on(name, event.exec.bind(null, this));
+  }
+
+  /**
+   * Gets BotConfigurable instance
+   * @returns BotConfigurable
+   */
+  public getBotConfig(): BotConfigurable {
+    return this.config;
   }
 }

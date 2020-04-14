@@ -1,7 +1,7 @@
-import BaseCommand from '../../src/structures/BaseCommand';
+import BaseCommand from '../../src/structures/base/BaseCommand';
 
 export default class HelpCommandMock extends BaseCommand {
-  public exec(): void {
-
+  public async exec(): Promise<void> {
+    // do something
   }
 }
