@@ -4,7 +4,7 @@ import Bot from '../../bot/Bot';
 
 export default class KickCommand extends BaseCommand {
   constructor() {
-    super('kick', 'moderation', [], []);
+    super('kick', 'moderation', []);
     this.getCommandConfigurable()
       .setDelimiter(/\s+/)
       .setExpectArgs(true);

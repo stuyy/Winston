@@ -3,10 +3,11 @@ import Bot from '../src/bot/Bot';
 import BaseCommand from '../src/structures/base/BaseCommand';
 import MockCommand from '../__mocks__/commands/help.mock';
 import CommandHandler from '../src/structures/CommandHandler';
+import PermissionGuard from '../src/structures/configs/permissions/PermissionGuard';
 
 describe('spying on Bot methods', () => {
   const bot: Bot = new Bot({});
-  const cmd: BaseCommand = new MockCommand('mock', 'mock', [], []);
+  const cmd: BaseCommand = new MockCommand('mock', 'mock', []);
   jest.spyOn(bot, 'addCommand');
   beforeEach(() => {
     jest.clearAllMocks();
@@ -24,7 +25,7 @@ describe('spying on Bot methods', () => {
     expect(cmd.getName()).toBe('mock');
     expect(cmd.getCategory()).toBe('mock');
     expect(cmd.getAliases()).toBeInstanceOf(Array);
-    expect(cmd.getPermissions()).toBeInstanceOf(Array);
+    expect(cmd.getPermissionGuard()).toBeInstanceOf(PermissionGuard);
   });
 
   it('should check if CommandHandler has 1 command', () => {
@@ -34,7 +35,7 @@ describe('spying on Bot methods', () => {
   });
 
   it('should add another command', () => {
-    const newCmd: BaseCommand = new MockCommand('kick', 'kick', [], []);
+    const newCmd: BaseCommand = new MockCommand('kick', 'kick', []);
     bot.addCommand(newCmd);
     expect(bot.addCommand).toHaveBeenCalledTimes(1);
     expect(bot.addCommand).toHaveBeenCalledWith(newCmd);
@@ -56,9 +57,9 @@ describe('adds three commands', () => {
   afterEach((done) => done());
 
   it('should add three commands', () => {
-    const cmd1 = new MockCommand('ban', 'moderation', ['banuser'], ['MANAGE_ROLES']);
-    const cmd2 = new MockCommand('kick', 'moderation', ['kickuser'], ['KICK_MEMBERS']);
-    const cmd3 = new MockCommand('mute', 'moderation', ['muteuser'], ['MANAGE_GUILD']);
+    const cmd1 = new MockCommand('ban', 'moderation', ['banuser']);
+    const cmd2 = new MockCommand('kick', 'moderation', ['kickuser']);
+    const cmd3 = new MockCommand('mute', 'moderation', ['muteuser']);
     bot.addCommand(cmd1).addCommand(cmd2).addCommand(cmd3);
     expect(bot.addCommand).toHaveBeenCalledWith(cmd1);
     expect(bot.addCommand).toHaveBeenCalledWith(cmd2);

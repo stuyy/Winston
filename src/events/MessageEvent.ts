@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Message, Permissions } from 'discord.js';
 import BaseEvent from '../structures/base/BaseEvent';
 import Bot from '../bot/Bot';
 import {
@@ -19,17 +19,8 @@ export default class MessageEvent extends BaseEvent {
     const { content } = message;
     if (content.startsWith(prefix)) {
       const cmdName = getCommandName(prefix, message.content); // Get the command name
-      if (bot.getCommands().has(cmdName)) { // Check if command name is in the command registry
-        // Check permissions
-        const command: BaseCommand = bot.getCommands().get(cmdName);
-        if (command.getCommandConfigurable().argsRequired()) {
-          const delimiter = command.getCommandConfigurable().getDelimiter();
-          const args = getCommandArgumentsWithDelimiter(prefix, cmdName, content, delimiter);
-          command.exec(bot, message, args);
-        } else {
-          command.exec(bot, message, null);
-        }
-      }
+      const command = bot.getCommands().get(cmdName);
+      if (command) bot.emit('textCommand', command, message);
     }
   }
 }

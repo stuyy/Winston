@@ -7,5 +7,5 @@ export default abstract class BaseEvent {
 
   public getName(): any { return this.name; }
 
-  public abstract exec(bot: Bot, args: any): void;
+  public abstract exec(bot: Bot, ...args: any): void;
 }

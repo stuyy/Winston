@@ -6,7 +6,7 @@ import BaseCommand from '../../structures/base/BaseCommand';
 
 export default class StatsCommand extends BaseCommand {
   constructor() {
-    super('stats', 'miscellaneous', [], []);
+    super('stats', 'miscellaneous', []);
     this.getCommandConfigurable()
       .setExpectArgs(true);
   }

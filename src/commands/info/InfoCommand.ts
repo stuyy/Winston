@@ -11,7 +11,7 @@ import Bot from '../../bot/Bot';
 
 export default class InfoCommand extends BaseCommand {
   constructor() {
-    super('info', 'information', [], []);
+    super('info', 'information', []);
     this.getCommandConfigurable()
       .setExpectArgs(false);
   }

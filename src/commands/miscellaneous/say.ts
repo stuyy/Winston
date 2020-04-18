@@ -5,7 +5,7 @@ import Bot from '../../bot/Bot';
 
 export default class SayCommand extends BaseCommand {
   constructor() {
-    super('say', 'miscellaneous', [], []);
+    super('say', 'miscellaneous', []);
     this.getCommandConfigurable()
       .setExpectArgs(true);
   }
