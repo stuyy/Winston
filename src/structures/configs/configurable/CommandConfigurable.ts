@@ -1,9 +1,16 @@
+import CommandOptions from '../../interfaces/CommandOptions';
+
 export default class CommandConfigurable {
   private expectArgs: boolean = false;
 
   private argsAsString: boolean = false;
 
   private delimiter: string | RegExp = null;
+
+  constructor(commandOptions: CommandOptions) {
+    this.expectArgs = commandOptions.argumentsRequired;
+    this.delimiter = new RegExp(commandOptions.delimiter);
+  }
 
   public setExpectArgs(expectArgs: boolean): CommandConfigurable {
     this.expectArgs = expectArgs;

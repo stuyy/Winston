@@ -1,12 +1,7 @@
-import { Message, Permissions } from 'discord.js';
+import { Message } from 'discord.js';
 import BaseEvent from '../structures/base/BaseEvent';
 import Bot from '../bot/Bot';
-import {
-  getCommandArguments,
-  getCommandName,
-  getCommandArgumentsWithDelimiter,
-} from '../utils/commands';
-import BaseCommand from '../structures/base/BaseCommand';
+import { getCommandName } from '../utils/commands';
 
 export default class MessageEvent extends BaseEvent {
   constructor() {

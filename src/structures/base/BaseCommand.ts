@@ -1,8 +1,10 @@
 import { Message } from 'discord.js';
 import CommandHandler from '../CommandHandler';
 import Bot from '../../bot/Bot';
-import CommandConfigurable from '../checks/CommandConfigurable';
+import CommandConfigurable from '../configs/configurable/CommandConfigurable';
 import PermissionGuard from '../configs/permissions/PermissionGuard';
+import CommandOptions from '../interfaces/CommandOptions';
+import PermissionOptions from '../interfaces/PermissionOptions';
 
 /* eslint-disable lines-between-class-members */
 export default abstract class BaseCommand {
@@ -17,13 +19,14 @@ export default abstract class BaseCommand {
     name: string,
     category: string,
     aliases: Array<string>,
-    permissions?: Array<string>,
+    permissionOptions: PermissionOptions,
+    commandOptions: CommandOptions,
   ) {
     this.name = name;
     this.category = category;
     this.aliases = aliases;
-    this.permissions = new PermissionGuard(permissions);
-    this.commandConfig = new CommandConfigurable();
+    this.permissions = new PermissionGuard(permissionOptions);
+    this.commandConfig = new CommandConfigurable(commandOptions);
   }
 
   public getName(): string { return this.name; }

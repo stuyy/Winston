@@ -8,7 +8,7 @@ describe('testing command utility functions', () => {
     let command: string;
     let index: number;
     const prefixes = ['win/', 'cin/', '--', '$'];
-    const commands = ['help', 'info', 'test', 'win/'];
+    const commands = ['help', 'info', 'test', 'random'];
     const messages = [
       'hello test command       ',
       '      testing command arguments one two three',
@@ -31,35 +31,43 @@ describe('testing command utility functions', () => {
         expect(prefix).toEqual('win/');
         command = commands[index];
         message = `${prefix}${command} ${messages[index]}`;
-        const [cmd, ...args] = utils.getCommandArguments(prefix, message);
+        const args = utils.getCommandArguments(prefix, command, message, /\s+/);
         expect(utils.getCommandArguments).toBeCalledTimes(1);
-        expect(cmd).toEqual('help');
-        expect(cmd).toEqual(command);
         expect(args.length).toEqual(3);
+        expect(args).toStrictEqual(['hello', 'test', 'command']);
       });
       test('it should test cin/ prefix and info command', () => {
         prefix = prefixes[index];
         expect(prefix).toEqual('cin/');
         command = commands[index];
         message = `${prefix}${command} ${messages[index]}`;
-        const [cmd, ...args] = utils.getCommandArguments(prefix, message);
-        expect(cmd).toEqual('info');
-        expect(cmd).toEqual(command);
+        const args = utils.getCommandArguments(prefix, command, message, /\s+/);
         expect(utils.getCommandArguments).toHaveBeenCalledTimes(2);
         expect(args.length).toEqual(6);
-        expect(args.length).toEqual(messages[index].trim().split(/\s+/).length);
+        expect(args).toStrictEqual(['testing', 'command', 'arguments', 'one', 'two', 'three']);
       });
-      test('it should test -- command', () => {
+      test('it should test -- prefix and TEST command', () => {
         prefix = prefixes[index];
         expect(prefix).toEqual('--');
         command = commands[index];
+        expect(command).toEqual('test');
         message = `${prefix}${command} ${messages[index]}`;
-        const [cmd, ...args] = utils.getCommandArguments(prefix, message);
+        const args = utils.getCommandArguments(prefix, command, message, /\s+/);
         expect(utils.getCommandArguments).toBeCalledTimes(3);
-        expect(cmd).toEqual('test');
-        expect(cmd).toEqual(command);
-        expect(args.length).toEqual(messages[index].split(/\s+/).length);
+        expect(args.length).toEqual(6);
+        expect(args).toStrictEqual([',,', ',', ',', ',', 'my', 'arg,s']);
       });
+      test('it should test $ prefix and random ', () => {
+        prefix = prefixes[index];
+        expect(prefix).toEqual('$');
+        command = commands[index];
+        expect(command).toEqual('random');
+        message = `${prefix}${command} ${messages[index]}`;
+        const args = utils.getCommandArguments(prefix, command, message, /\s+/);
+        expect(utils.getCommandArguments).toBeCalledTimes(4);
+        expect(args.length).toEqual(7);
+        expect(args).toStrictEqual(['this', 'c,m,md,', 't', 'e', 's', 't', 'commands']);
+      })
     });
   });
   describe('testing extractAfterCommandName function', () => {

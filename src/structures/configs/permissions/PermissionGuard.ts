@@ -1,13 +1,14 @@
 import { Permissions } from 'discord.js';
+import PermissionOptions from '../../interfaces/PermissionOptions';
 
 export default class PermissionGuard {
   private requiredPermissions: boolean;
 
   private commandPermissions: Array<string>;
 
-  constructor(commandPermissions: Array<string>) {
-    this.requiredPermissions = false;
-    this.commandPermissions = commandPermissions;
+  constructor(permissionOptions: PermissionOptions) {
+    this.requiredPermissions = permissionOptions.required;
+    this.commandPermissions = permissionOptions.permissions;
   }
 
   /**

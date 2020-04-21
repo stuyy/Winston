@@ -3,12 +3,20 @@ import { Message, TextChannel, Guild } from 'discord.js';
 import Bot from '../src/bot/Bot';
 import InfoCommand from '../src/commands/info/InfoCommand';
 import BaseCommand from '../src/structures/base/BaseCommand';
+import commands from '../src/config/commands';
 
 describe('should test all commands', () => {
   let info: BaseCommand;
   let bot: Bot;
+  const command = commands.InfoCommand;
   beforeAll(() => {
-    info = new InfoCommand();
+    info = new InfoCommand(
+      command.name,
+      command.category,
+      command.aliases,
+      command.permissionOptions,
+      command.commandOptions,
+    );
     bot = new Bot({});
     jest.spyOn(bot, 'addCommand');
   });

@@ -1,21 +1,18 @@
 /* eslint-disable import/prefer-default-export */
 /**
- * Gets command arguments
- * @param prefix prefix of command
- * @param content the string to parse
- * @returns array of arguments
+ * @param prefix command prefix
+ * @param cmdName command name
+ * @param content the content to parse
+ * @param delimiter the separator to use to split content
  */
-export function getCommandArguments(prefix: string, content: string): Array<string> {
-  return content.substring(prefix.length).trim().split(/\s+/);
-}
-
-export function getCommandArgumentsWithDelimiter(
+export function getCommandArguments(
   prefix: string,
   cmdName: string,
   content: string,
   delimiter: string | RegExp,
 ): Array<string> {
-  return content.substring(prefix.length + cmdName.length).trim().split(delimiter);
+  const args = content.substring(prefix.length + cmdName.length).trim();
+  return args.length === 0 ? [] : args.split(delimiter);
 }
 
 /**

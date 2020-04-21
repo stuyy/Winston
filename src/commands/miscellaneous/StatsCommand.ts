@@ -5,12 +5,6 @@ import Bot from '../../bot/Bot';
 import BaseCommand from '../../structures/base/BaseCommand';
 
 export default class StatsCommand extends BaseCommand {
-  constructor() {
-    super('stats', 'miscellaneous', []);
-    this.getCommandConfigurable()
-      .setExpectArgs(true);
-  }
-
   public async exec(bot: Bot, message: Message, args: Array<string>): Promise<void> {
     const [id] = args;
     const { guild } = message;

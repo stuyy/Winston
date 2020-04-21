@@ -3,7 +3,7 @@ import { Message, Permissions } from 'discord.js';
 import BaseEvent from '../structures/base/BaseEvent';
 import Bot from '../bot/Bot';
 import BaseCommand from '../structures/base/BaseCommand';
-import { getCommandArgumentsWithDelimiter } from '../utils/commands';
+import { getCommandArguments } from '../utils/commands';
 
 export default class TextCommandEvent extends BaseEvent {
   constructor() {
@@ -20,18 +20,22 @@ export default class TextCommandEvent extends BaseEvent {
         message.channel.send('You have permissions');
         if (command.getCommandConfigurable().argsRequired()) {
           const delimiter = command.getCommandConfigurable().getDelimiter();
-          const args = getCommandArgumentsWithDelimiter(
+          const args = getCommandArguments(
             prefix, command.getName(), content, delimiter,
           );
           command.exec(bot, message, args)
             .then(() => console.log('Command Invoked Successfully'))
             .catch((err) => console.log(err));
-        } else command.exec(bot, message, null);
-      } else {
-        message.channel.send('You do not have permissions.');
-      }
+        } else command.exec(bot, message, []);
+      } else message.channel.send('You do not have permissions.');
     } else {
-      message.channel.send('Permissions not required');
+      const delimiter = command.getCommandConfigurable().getDelimiter();
+      const args = getCommandArguments(
+        prefix, command.getName(), content, delimiter,
+      );
+      command.exec(bot, message, args)
+        .then(() => console.log('Command Invoked Successfully'))
+        .catch((err) => console.log(err));
     }
   }
 }

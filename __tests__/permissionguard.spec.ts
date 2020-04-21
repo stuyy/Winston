@@ -3,9 +3,10 @@ import { Permissions } from 'discord.js';
 import PermissionGuard from '../src/structures/configs/permissions/PermissionGuard';
 
 describe('testing permission guard class', () => {
-  const guard: PermissionGuard = new PermissionGuard(
-    ['MANAGE_GUILD', 'KICK_MEMBERS', 'BAN_MEMBERS'],
-  );
+  const guard: PermissionGuard = new PermissionGuard({
+    required: true,
+    permissions: ['MANAGE_GUILD', 'KICK_MEMBERS', 'BAN_MEMBERS'],
+  });
   const perms: Permissions = new Permissions(67648);
 
   jest.spyOn(guard, 'checkPermissions');

@@ -1,12 +1,20 @@
 /* eslint-disable no-undef */
 import { Message, Permissions } from 'discord.js';
 import Bot from '../src/bot/Bot';
-import BanCommand from '../src/commands/moderation/ban';
+import BanCommand from '../src/commands/moderation/BanCommand';
 import BaseCommand from '../src/structures/base/BaseCommand';
+import commands from '../src/config/commands';
 
 describe('testing ban command', () => {
   const bot: Bot = new Bot({});
-  const ban: BaseCommand = new BanCommand();
+  const command = commands.BanCommand;
+  const ban: BaseCommand = new BanCommand(
+    command.name,
+    command.category,
+    command.aliases,
+    command.permissionOptions,
+    command.commandOptions,
+  );
   beforeEach((done) => {
     done();
   });
