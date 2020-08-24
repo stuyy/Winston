@@ -11,3 +11,4 @@ export default class ReadyEvent extends BaseEvent {
     console.log(`${bot.user.tag} has logged in.`);
   }
 }
+ 
