@@ -1,4 +1,6 @@
+import { Message } from 'discord.js';
 import BaseCommand from '../../structures/base/BaseCommand';
+import Bot from '../../bot/Bot';
 
 export default class KickCommand extends BaseCommand {
   constructor() {
@@ -8,7 +10,7 @@ export default class KickCommand extends BaseCommand {
       .setExpectArgs(true);
   }
 
-  public async exec(): Promise<void> {
+  public async exec(bot: Bot, message: Message, args: Array<string> | null): Promise<void> {
     // do something
   }
 }
